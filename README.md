@@ -1,4 +1,6 @@
 # asset-management-console
+![CI/CD](https://github.com/tim-othy/asset-manager-console/workflows/CI/CD/badge.svg)  
+[![codecov](https://codecov.io/gh/tim-othy/asset-manager-console/branch/main/graph/badge.svg)](https://codecov.io/gh/tim-othy/asset-manager-console)  
 Web application for asset management
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

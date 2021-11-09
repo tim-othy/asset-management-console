@@ -4,8 +4,7 @@ import {Select} from "semantic-ui-react";
 import {tickers} from "../constants/ticker-dictionary-filtered.js"
 
 import _ from 'lodash'
-import faker from 'faker'
-import { Search, Grid, Header, Segment } from 'semantic-ui-react'
+import { Search } from 'semantic-ui-react'
 
 // const source = _.times(5, () => ({
 //     title: faker.company.companyName(),

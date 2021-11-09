@@ -4,7 +4,7 @@ import moment from "moment";
 import { Charts, ChartContainer, ChartRow, YAxis, LineChart, BarChart, Resizable } from "react-timeseries-charts";
 import { Collection, TimeSeries, TimeEvent, IndexedEvent, TimeRange } from "pondjs";
 
-import aapl from './aapl_historical.json'
+import aapl from '../data/aapl_historical.json'
 
 const name = "AAPL-price";
 const columns = ["time", "open", "close", "low", "high"];

@@ -1,7 +1,7 @@
 import React from "react";
 import { useMsal } from "@azure/msal-react";
 import { loginRequest } from "../authConfig";
-import Button from "react-bootstrap/Button";
+import {Button, Icon} from "semantic-ui-react";
 
 const handleLogin = (instance) => {
     instance.loginRedirect(loginRequest)
@@ -17,6 +17,12 @@ export const SignInButton = () => {
     const { instance } = useMsal();
 
     return (
-        <Button variant="secondary" className="ml-auto" onClick={() => handleLogin(instance)}>Sign in using Redirect</Button>
+        <Button animated onClick={() => handleLogin(instance)}>
+            <Button.Content visible>Sign in with Microsoft</Button.Content>
+            {/*<Button.Content hidden>Here</Button.Content>*/}
+            <Button.Content hidden>
+                <Icon name='microsoft' />
+            </Button.Content>
+        </Button>
     );
 }

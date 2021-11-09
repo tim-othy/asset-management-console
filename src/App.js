@@ -1,20 +1,20 @@
 import React from "react";
-import { AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";
-import { PageLayout } from "./components/PageLayout";
+import {AuthenticatedTemplate, UnauthenticatedTemplate} from "@azure/msal-react";
 import LoginForm from "./components/LoginForm";
 
 import 'semantic-ui-css/semantic.min.css'
+import {SignOutButton} from "./components/SignOutButton";
 
 function App() {
     return (
-        <PageLayout>
+        <>
             <AuthenticatedTemplate>
-                <p>You are logged in</p>
+                <SignOutButton />
             </AuthenticatedTemplate>
             <UnauthenticatedTemplate>
                 <LoginForm />
             </UnauthenticatedTemplate>
-        </PageLayout>
+        </>
     );
 }
 

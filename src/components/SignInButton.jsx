@@ -17,7 +17,7 @@ export const SignInButton = () => {
     const { instance } = useMsal();
 
     return (
-        <Button animated onClick={() => handleLogin(instance)}>
+        <Button size='huge' animated onClick={() => handleLogin(instance)}>
             <Button.Content visible>Sign in with Microsoft</Button.Content>
             {/*<Button.Content hidden>Here</Button.Content>*/}
             <Button.Content hidden>

@@ -15,6 +15,6 @@ export const SignOutButton = () => {
     const { instance } = useMsal();
 
     return (
-        <Button onClick={() => handleLogout(instance)}>Sign out using Redirect</Button>
+        <Button onClick={() => handleLogout(instance)}>Sign out</Button>
     );
 }

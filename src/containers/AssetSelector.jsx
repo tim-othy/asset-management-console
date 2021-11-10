@@ -70,7 +70,7 @@ export const AssetSelector = (props) => {
                 props.fetchAssetDataRequested(data.result.value)
             }
             }
-            fluid={false}
+            fluid={true}
             onSearchChange={handleSearchChange}
             results={results}
             value={value}

@@ -1,5 +1,3 @@
-import aapl from '../data/aapl_historical.json'
-
 const initialState = {
     targetAsset: '',
     errorMessage: '',

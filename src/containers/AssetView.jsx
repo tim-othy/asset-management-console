@@ -4,24 +4,24 @@ import moment from "moment";
 import { Charts, ChartContainer, ChartRow, YAxis, LineChart, BarChart, Resizable } from "react-timeseries-charts";
 import { Collection, TimeSeries, TimeEvent, IndexedEvent, TimeRange } from "pondjs";
 
-import aapl from '../data/aapl_historical.json'
 import {connect} from "react-redux";
 
 const name = "AAPL-price";
 const columns = ["time", "open", "close", "low", "high"];
 
-// var fmt = "YYYY-MM-DD";
-// var beginTime = moment("2021-11-09", fmt);
-// var endTime =   moment("2021-06-21", fmt);
-// var range = new TimeRange([beginTime, endTime]);
+var fmt = "YYYY-MM-DD";
+var beginTime = moment("2020-01-01", fmt);
+const endTime = moment()
+// const beginTime = endTime.subtract(1, 'years')
+var range = new TimeRange(beginTime, endTime);
 
 export class AssetView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             mode: "linear",
-            timerange: new TimeRange([1624226400000, 1636412400000]),
-            // timerange: range,
+            // timerange: new TimeRange([1624226400000, 1636412400000]),
+            timerange: range,
             data: props.data
         };
     }
@@ -39,11 +39,10 @@ export class AssetView extends React.Component {
     };
 
     componentDidUpdate() {
-        this.render()
+        this.renderChart()
     }
 
-    renderChart = () => {
-        console.log('data', this.props.data)
+    getTimeseries = () => {
         const events = this.props.data.map(item => {
             const timestamp = moment(new Date(item.date));
             const { open, close, low, high } = item;
@@ -56,8 +55,10 @@ export class AssetView extends React.Component {
         });
         const collection = new Collection(events);
         const sortedCollection = collection.sortByTime();
-        const series = new TimeSeries({ name, columns, collection: sortedCollection });
+        return new TimeSeries({ name, columns, collection: sortedCollection });
+    }
 
+    getVolumeSeries = () => {
         const volumeEvents = this.props.data.map(item => {
             const index = item.date.replace(/\//g, "-");
             const { volume } = item;
@@ -66,14 +67,20 @@ export class AssetView extends React.Component {
         const volumeCollection = new Collection(volumeEvents);
         const sortedVolumeCollection = volumeCollection.sortByTime();
 
-        const seriesVolume = new TimeSeries({
+        return new TimeSeries({
             name: "AAPL-volume",
             utc: false,
             collection: sortedVolumeCollection
         });
 
+    }
+
+    renderChart = () => {
+        const timeSeries = this.getTimeseries()
+        const seriesVolume = this.getVolumeSeries()
+
         const { timerange } = this.state;
-        const croppedSeries = series.crop(timerange);
+        const croppedSeries = timeSeries.crop(timerange);
         const croppedVolumeSeries = seriesVolume.crop(timerange);
         return (
             <ChartContainer

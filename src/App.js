@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 
 import 'semantic-ui-css/semantic.min.css'
 import {SignOutButton} from "./components/SignOutButton";
-import {AssetDashboard} from "./containers/AssetDashboard";
+import {AssetDashboard} from "./components/AssetDashboard";
 
 import store from './store';
 

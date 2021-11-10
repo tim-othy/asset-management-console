@@ -16,17 +16,23 @@ function* fetchAssetDataSaga() {
 function* fetchAssetData(action) {
     try {
         const response = yield call(
-            fetchAlphaVantageExchangeRate,
+            fetchData,
             action.targetAsset
         );
-        console.log('resopnse', response.items.timeseries)
-        yield put({ type: "FETCH_ASSET_DATA_SUCCEEDED", data: response.items.timeseries, targetAsset: action.targetAsset})
+        const assetData = response.items.timeseries
+        const targetAsset = action.targetAsset
+        // yield put(fetchAssetDataSucceeded(assetData, targetAsset))
+        yield put({
+            type: "FETCH_ASSET_DATA_SUCCEEDED",
+            data: response.items.timeseries,
+            targetAsset: action.targetAsset
+        })
     } catch (e) {
         yield put(fetchAssetDataFailed())
     }
 }
 
-const fetchAlphaVantageExchangeRate = async (targetAsset) => {
+const fetchData = async (targetAsset) => {
     const url = `http://127.0.0.1:5000/timeseries/${targetAsset}`;
     const response = await fetch(
         url,

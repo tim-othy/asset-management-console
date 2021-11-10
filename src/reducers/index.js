@@ -1,7 +1,18 @@
+import aapl from '../data/aapl_historical.json'
+
 const initialState = {
     targetAsset: '',
     errorMessage: '',
-    data: {},
+    data: [
+        {
+            "date": "2016/05/13",
+            "close": 90.52,
+            "volume": 44223040,
+            "open": 90,
+            "high": 91.67,
+            "low": 90
+        },
+    ]
 }
 
 export const rootReducer = (state=initialState, action) => {

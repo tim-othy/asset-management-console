@@ -8,9 +8,10 @@ export const fetchAssetDataRequested = (targetAsset) => ({
     targetAsset
 })
 
-export const fetchAssetDataSucceeded = (assetData) => ({
+export const fetchAssetDataSucceeded = (assetData, targetAsset) => ({
     type: "FETCH_ASSET_DATA_SUCCEEDED",
-    assetData
+    assetData,
+    targetAsset
 })
 
 export const fetchAssetDataFailed = () => ({

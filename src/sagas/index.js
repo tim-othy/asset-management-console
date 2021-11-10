@@ -20,7 +20,7 @@ function* fetchAssetData(action) {
             action.targetAsset
         );
         console.log('resopnse', response.items.timeseries)
-        yield put({ type: "FETCH_ASSET_DATA_SUCCEEDED", data: response.items.timeseries})
+        yield put({ type: "FETCH_ASSET_DATA_SUCCEEDED", data: response.items.timeseries, targetAsset: action.targetAsset})
     } catch (e) {
         yield put(fetchAssetDataFailed())
     }
@@ -28,7 +28,6 @@ function* fetchAssetData(action) {
 
 const fetchAlphaVantageExchangeRate = async (targetAsset) => {
     const url = `http://127.0.0.1:5000/timeseries/${targetAsset}`;
-    // const url = 'http://127.0.0.1:5000/timeseries/AE'
     const response = await fetch(
         url,
         {

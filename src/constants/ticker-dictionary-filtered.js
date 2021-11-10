@@ -7647,4 +7647,9 @@ export const tickers =  [
     {  "Zymeworks Inc. Common Shares": "ZYME" },
     {  "Zynerba Pharmaceuticals Inc. Common Stock": "ZYNE" },
     {  "Zynex Inc. Common Stock": "ZYXI" }
-]
+].map(
+    item => ({
+        "title": Object.keys(item)[0],
+        "value": Object.values(item)[0],
+    })
+)

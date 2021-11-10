@@ -1,8 +1,8 @@
 import React from "react";
 
-import {AssetSelector} from "./AssetSelector"
+import AssetSelector from "./AssetSelector"
 import {AssetView} from "./AssetView"
-import {SignOutButton} from "./SignOutButton";
+import {SignOutButton} from "../components/SignOutButton";
 
 export const AssetDashboard = () => (
     <>

@@ -1,24 +1,13 @@
 import React from "react";
-import {Select} from "semantic-ui-react";
+import { connect } from 'react-redux';
 
 import {tickers} from "../constants/ticker-dictionary-filtered.js"
 
 import _ from 'lodash'
 import { Search } from 'semantic-ui-react'
+import {fetchAssetDataRequested, setTargetAsset} from "../actions";
 
-// const source = _.times(5, () => ({
-//     title: faker.company.companyName(),
-//     description: faker.company.catchPhrase(),
-//     image: faker.internet.avatar(),
-//     price: faker.finance.amount(0, 100, 2, '$'),
-// }))
-
-const source = tickers.map(
-    item => ({
-        "title": Object.keys(item)[0],
-        "value": Object.values(item)[0],
-    })
-)
+const source = tickers
 
 const initialState = {
     loading: false,
@@ -26,7 +15,7 @@ const initialState = {
     value: '',
 }
 
-function exampleReducer(state, action) {
+function searchReducer(state, action) {
     switch (action.type) {
         case 'CLEAN_QUERY':
             return initialState
@@ -42,8 +31,8 @@ function exampleReducer(state, action) {
     }
 }
 
-export const AssetSelector = () => {
-    const [state, dispatch] = React.useReducer(exampleReducer, initialState)
+export const AssetSelector = (props) => {
+    const [state, dispatch] = React.useReducer(searchReducer, initialState)
     const { loading, results, value } = state
 
     const timeoutRef = React.useRef()
@@ -75,12 +64,27 @@ export const AssetSelector = () => {
     return (
         <Search
             loading={loading}
-            onResultSelect={(e, data) =>
-                dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title })
+            onResultSelect={(e, data) => {
+                dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title });
+                props.setTargetAsset(data.result.title)
+                props.fetchAssetDataRequested(data.result.value)
             }
+            }
+            fluid={false}
             onSearchChange={handleSearchChange}
             results={results}
             value={value}
         />
     )
 }
+
+const mapStateToProps = (state) => ({
+    targetAsset: state.targetAsset
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    setTargetAsset: (targetAsset) => dispatch(setTargetAsset(targetAsset)),
+    fetchAssetDataRequested: (targetAsset) => dispatch(fetchAssetDataRequested(targetAsset))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AssetSelector);

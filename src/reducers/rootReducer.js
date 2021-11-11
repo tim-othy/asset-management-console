@@ -24,7 +24,8 @@ export const rootReducer = (state=initialState, action) => {
         case FETCH_ASSET_DATA_REQUESTED:
             return {
                 ...state,
-                targetAsset: action.targetAsset
+                targetAsset: action.targetAsset,
+                errorMessage: ''
             }
         case FETCH_ASSET_DATA_SUCCEEDED:
             const assetData = action.assetData;

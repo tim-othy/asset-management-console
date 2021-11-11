@@ -1,6 +1,6 @@
 import React, {
     useReducer,
-    useCallback,
+    useRef,
     useEffect
 } from "react";
 import { connect } from 'react-redux';
@@ -20,33 +20,29 @@ import {
 
 const source = tickers
 
-export const AssetSelector = (props) => {
+const AssetSelector = (props) => {
     const [state, dispatch] = useReducer(searchReducer, initialSearchState)
     const { loading, results, value } = state
+    const timeoutRef = useRef()
+    const handleSearchChange = (e, data) => {
+        clearTimeout(timeoutRef.current)
+        dispatch(startSearch(data.value))
 
-    const timeoutRef = React.useRef()
-    const handleSearchChange = useCallback(
-        (e, data) => {
-            clearTimeout(timeoutRef.current)
-            dispatch(startSearch(data.value))
+        timeoutRef.current = setTimeout(
+            () => {
+                if (data.value.length === 0) {
+                    dispatch(cleanQuery())
+                    return
+                }
 
-            timeoutRef.current = setTimeout(
-                () => {
-                    if (data.value.length === 0) {
-                        dispatch(cleanQuery())
-                        return
-                    }
+                const re = new RegExp(_.escapeRegExp(data.value), 'i')
+                const isMatch = (result) => re.test(result.title)
 
-                    const re = new RegExp(_.escapeRegExp(data.value), 'i')
-                    const isMatch = (result) => re.test(result.title)
-
-                    dispatch(finishSearch(_.filter(source, isMatch)))
-                },
-                300
-            )
-        },
-        []
-    )
+                dispatch(finishSearch(_.filter(source, isMatch)))
+            },
+            300
+        )
+    }
 
     useEffect(
         () => (() => { clearTimeout(timeoutRef.current) }),
@@ -59,7 +55,7 @@ export const AssetSelector = (props) => {
             loading={loading}
             onResultSelect={
                 (e, data) => {
-                    dispatch(updateSelection(data.result.title));
+                    props.updateSelection(data.result.title)
                     props.fetchAssetDataRequested(data.result.value)
                 }
             }
@@ -76,7 +72,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    fetchAssetDataRequested: (targetAsset) => dispatch(fetchAssetDataRequested(targetAsset))
+    fetchAssetDataRequested: (targetAsset) => dispatch(fetchAssetDataRequested(targetAsset)),
+    updateSelection: (selection) => dispatch(updateSelection(selection)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AssetSelector);

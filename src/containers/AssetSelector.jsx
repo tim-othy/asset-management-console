@@ -63,6 +63,7 @@ export const AssetSelector = (props) => {
 
     return (
         <Search
+            style={{width: "500ps"}}
             loading={loading}
             onResultSelect={(e, data) => {
                 dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title });

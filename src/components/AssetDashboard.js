@@ -7,12 +7,13 @@ import {SignOutButton} from "./SignOutButton";
 
 export const AssetDashboard = () => (
     <>
-    <Grid centered>
-        <Grid.Row columns={2}>
+    <Grid centered padded>
+        <Grid.Row columns={3} padded='horizontally'>
             <Grid.Column>
                 <AssetSelector />
             </Grid.Column>
-            <Grid.Column floated='left'>
+            <Grid.Column></Grid.Column>
+            <Grid.Column>
                 <SignOutButton />
             </Grid.Column>
         </Grid.Row>

@@ -6,7 +6,7 @@ export const initialSearchState = {
     value: '',
 }
 
-export const searchReducer = (state, action) => {
+export const searchReducer = (state=initialSearchState, action) => {
     switch (action.type) {
         case CLEAN_QUERY:
             return initialSearchState
@@ -16,8 +16,7 @@ export const searchReducer = (state, action) => {
             return { ...state, loading: false, results: action.results }
         case UPDATE_SELECTION:
             return { ...state, value: action.selection }
-
         default:
-            throw new Error()
+            return state
     }
 }

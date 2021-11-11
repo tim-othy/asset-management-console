@@ -10,11 +10,11 @@ const initialState = {
     assetData: [
         {
             "date": "2016/05/13",
-            "close": 90.52,
-            "volume": 44223040,
-            "open": 90,
-            "high": 91.67,
-            "low": 90
+            "close": 0,
+            "volume": 0,
+            "open": 0,
+            "high": 0,
+            "low": 0
         },
     ]
 }
@@ -27,11 +27,9 @@ export const rootReducer = (state=initialState, action) => {
                 targetAsset: action.targetAsset
             }
         case FETCH_ASSET_DATA_SUCCEEDED:
-            const targetAsset = action.targetAsset;
             const assetData = action.assetData;
             return {
                 ...state,
-                targetAsset,
                 assetData,
                 errorMessage: ''
             }

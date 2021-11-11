@@ -5,14 +5,14 @@ import {
     fetchAssetDataSucceeded,
     finishSearch,
     startSearch, updateSelection
-} from "./index";
+} from "../../actions";
 import {
     CLEAN_QUERY,
     FETCH_ASSET_DATA_FAILED,
     FETCH_ASSET_DATA_REQUESTED,
     FETCH_ASSET_DATA_SUCCEEDED, FINISH_SEARCH,
     START_SEARCH, UPDATE_SELECTION
-} from "../constants";
+} from "../../constants";
 
 test('should generate fetch asset data requested action', () => {
     const action = fetchAssetDataRequested('target-asset')

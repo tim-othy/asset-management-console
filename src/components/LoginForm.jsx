@@ -3,7 +3,7 @@ import { Icon, Grid, Header, Segment } from 'semantic-ui-react'
 import {SignInButton} from "./SignInButton";
 
 const LoginForm = () => (
-    <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+    <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
         <Grid.Column style={{ maxWidth: 500 }}>
             <Segment padded='very'>
                 <Header

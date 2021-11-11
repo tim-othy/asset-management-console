@@ -19,7 +19,7 @@ function App() {
                 <div
                     style={{
                         backgroundImage: `url(${process.env.PUBLIC_URL + '/bg.jpg'})`,
-                        height: '100vh',
+                        height: '101.9vh',
                         backgroundSize: 'cover',
                     }}
                 >

@@ -1,3 +1,9 @@
+import {
+    FETCH_ASSET_DATA_FAILED,
+    FETCH_ASSET_DATA_REQUESTED,
+    FETCH_ASSET_DATA_SUCCEEDED
+} from "../constants";
+
 const initialState = {
     targetAsset: '',
     errorMessage: '',
@@ -15,12 +21,12 @@ const initialState = {
 
 export const rootReducer = (state=initialState, action) => {
     switch(action.type) {
-        case "FETCH_ASSET_DATA_REQUESTED":
+        case FETCH_ASSET_DATA_REQUESTED:
             return {
                 ...state,
                 targetAsset: action.targetAsset
             }
-        case "FETCH_ASSET_DATA_SUCCEEDED":
+        case FETCH_ASSET_DATA_SUCCEEDED:
             const targetAsset = action.targetAsset;
             const assetData = action.assetData;
             return {
@@ -29,7 +35,7 @@ export const rootReducer = (state=initialState, action) => {
                 assetData,
                 errorMessage: ''
             }
-        case "FETCH_ASSET_DATA_FAILED":
+        case FETCH_ASSET_DATA_FAILED:
             return {
                 ...state,
                 errorMessage: 'Failed to fetch asset data'

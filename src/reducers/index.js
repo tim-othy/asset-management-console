@@ -1,7 +1,7 @@
 const initialState = {
     targetAsset: '',
     errorMessage: '',
-    data: [
+    assetData: [
         {
             "date": "2016/05/13",
             "close": 90.52,
@@ -22,11 +22,11 @@ export const rootReducer = (state=initialState, action) => {
             }
         case "FETCH_ASSET_DATA_SUCCEEDED":
             const targetAsset = action.targetAsset;
-            const data = action.data;
+            const assetData = action.assetData;
             return {
                 ...state,
                 targetAsset,
-                data,
+                assetData,
                 errorMessage: ''
             }
         case "FETCH_ASSET_DATA_FAILED":

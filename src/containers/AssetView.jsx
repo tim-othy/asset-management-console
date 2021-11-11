@@ -22,7 +22,7 @@ export class AssetView extends React.Component {
             mode: "linear",
             // timerange: new TimeRange([1624226400000, 1636412400000]),
             timerange: range,
-            data: props.data
+            assetData: props.assetData
         };
     }
 
@@ -43,7 +43,7 @@ export class AssetView extends React.Component {
     }
 
     getTimeseries = () => {
-        const events = this.props.data.map(item => {
+        const events = this.props.assetData.map(item => {
             const timestamp = moment(new Date(item.date));
             const { open, close, low, high } = item;
             return new TimeEvent(timestamp.toDate(), {
@@ -59,7 +59,7 @@ export class AssetView extends React.Component {
     }
 
     getVolumeSeries = () => {
-        const volumeEvents = this.props.data.map(item => {
+        const volumeEvents = this.props.assetData.map(item => {
             const index = item.date.replace(/\//g, "-");
             const { volume } = item;
             return new IndexedEvent(index, { volume: +volume });
@@ -187,7 +187,7 @@ const mapStateToProps = (state) => {
     console.log('state', state)
     return {
         targetAsset: state.targetAsset,
-        data: state.data
+        assetData: state.assetData
     }
 }
 

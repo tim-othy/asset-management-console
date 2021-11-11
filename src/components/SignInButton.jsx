@@ -19,7 +19,6 @@ export const SignInButton = () => {
     return (
         <Button size='huge' animated onClick={() => handleLogin(instance)}>
             <Button.Content visible>Sign in with Microsoft</Button.Content>
-            {/*<Button.Content hidden>Here</Button.Content>*/}
             <Button.Content hidden>
                 <Icon name='microsoft' />
             </Button.Content>

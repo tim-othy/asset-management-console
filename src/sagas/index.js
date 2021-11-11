@@ -21,12 +21,7 @@ function* fetchAssetData(action) {
         );
         const assetData = response.items.timeseries
         const targetAsset = action.targetAsset
-        // yield put(fetchAssetDataSucceeded(assetData, targetAsset))
-        yield put({
-            type: "FETCH_ASSET_DATA_SUCCEEDED",
-            data: response.items.timeseries,
-            targetAsset: action.targetAsset
-        })
+        yield put(fetchAssetDataSucceeded(assetData, targetAsset))
     } catch (e) {
         yield put(fetchAssetDataFailed())
     }

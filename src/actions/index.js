@@ -10,7 +10,7 @@ export const fetchAssetDataRequested = (targetAsset) => ({
 
 export const fetchAssetDataSucceeded = (assetData, targetAsset) => ({
     type: "FETCH_ASSET_DATA_SUCCEEDED",
-    assetData,
+    assetData: assetData,
     targetAsset
 })
 

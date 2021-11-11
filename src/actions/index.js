@@ -1,14 +1,8 @@
 import {
-    SET_TARGET_ASSET,
     FETCH_ASSET_DATA_REQUESTED,
     FETCH_ASSET_DATA_SUCCEEDED,
     FETCH_ASSET_DATA_FAILED, START_SEARCH, FINISH_SEARCH, CLEAN_QUERY, UPDATE_SELECTION
 } from '../constants'
-
-export const setTargetAsset = (targetAsset) => ({
-        type: SET_TARGET_ASSET,
-        targetAsset
-})
 
 export const fetchAssetDataRequested = (targetAsset) => ({
     type: FETCH_ASSET_DATA_REQUESTED,

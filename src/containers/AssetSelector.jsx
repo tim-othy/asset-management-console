@@ -1,4 +1,8 @@
-import React, { useReducer, useCallback } from "react";
+import React, {
+    useReducer,
+    useCallback,
+    useEffect
+} from "react";
 import { connect } from 'react-redux';
 
 import {tickers} from "../constants"
@@ -10,7 +14,6 @@ import {
     cleanQuery,
     fetchAssetDataRequested,
     finishSearch,
-    setTargetAsset,
     startSearch,
     updateSelection
 } from "../actions";
@@ -22,37 +25,43 @@ export const AssetSelector = (props) => {
     const { loading, results, value } = state
 
     const timeoutRef = React.useRef()
-    const handleSearchChange = useCallback((e, data) => {
-        clearTimeout(timeoutRef.current)
-        dispatch(startSearch(data.value))
-
-        timeoutRef.current = setTimeout(() => {
-            if (data.value.length === 0) {
-                dispatch(cleanQuery())
-                return
-            }
-
-            const re = new RegExp(_.escapeRegExp(data.value), 'i')
-            const isMatch = (result) => re.test(result.title)
-
-            dispatch(finishSearch(_.filter(source, isMatch)))
-        }, 300)
-    }, [])
-    React.useEffect(() => {
-        return () => {
+    const handleSearchChange = useCallback(
+        (e, data) => {
             clearTimeout(timeoutRef.current)
-        }
-    }, [])
+            dispatch(startSearch(data.value))
+
+            timeoutRef.current = setTimeout(
+                () => {
+                    if (data.value.length === 0) {
+                        dispatch(cleanQuery())
+                        return
+                    }
+
+                    const re = new RegExp(_.escapeRegExp(data.value), 'i')
+                    const isMatch = (result) => re.test(result.title)
+
+                    dispatch(finishSearch(_.filter(source, isMatch)))
+                },
+                300
+            )
+        },
+        []
+    )
+
+    useEffect(
+        () => (() => { clearTimeout(timeoutRef.current) }),
+        []
+    )
 
     return (
         <Search
             style={{width: "500ps"}}
             loading={loading}
-            onResultSelect={(e, data) => {
-                dispatch(updateSelection(data.result.title));
-                props.setTargetAsset(data.result.title)
-                props.fetchAssetDataRequested(data.result.value)
-            }
+            onResultSelect={
+                (e, data) => {
+                    dispatch(updateSelection(data.result.title));
+                    props.fetchAssetDataRequested(data.result.value)
+                }
             }
             fluid={true}
             onSearchChange={handleSearchChange}
@@ -67,7 +76,6 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    setTargetAsset: (targetAsset) => dispatch(setTargetAsset(targetAsset)),
     fetchAssetDataRequested: (targetAsset) => dispatch(fetchAssetDataRequested(targetAsset))
 });
 

@@ -4,6 +4,7 @@ import LoginForm from "./components/LoginForm";
 import { Provider } from 'react-redux';
 
 import 'semantic-ui-css/semantic.min.css'
+import './style.css'
 import {AssetDashboard} from "./components/AssetDashboard";
 
 import store from './store';
@@ -15,7 +16,15 @@ function App() {
                 <AssetDashboard />
             </AuthenticatedTemplate>
             <UnauthenticatedTemplate>
-                <LoginForm />
+                <div
+                    style={{
+                        backgroundImage: `url(${process.env.PUBLIC_URL + '/bg.jpg'})`,
+                        height: '100vh',
+                        backgroundSize: 'cover',
+                    }}
+                >
+                    <LoginForm/>
+                </div>
             </UnauthenticatedTemplate>
         </Provider>
     );

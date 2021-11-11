@@ -14,7 +14,7 @@ const LoginForm = () => (
                 </Header>
                 <Header
                     as='h1'
-                    color='teal'
+                    style={{color: 'steelblue', backdropFilter: 'blur(8px)'}}
                     textAlign='center'
                     content='Asset management console'
                 />

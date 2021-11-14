@@ -53,6 +53,7 @@ const AssetSelector = (props) => {
         <Search
             style={{width: "500ps"}}
             loading={loading}
+            minCharacters={2}
             onResultSelect={
                 (e, data) => {
                     props.updateSelection(data.result.title)

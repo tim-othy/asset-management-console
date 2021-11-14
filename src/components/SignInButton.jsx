@@ -10,9 +10,6 @@ const handleLogin = (instance) => {
         });
 }
 
-/**
- * Renders a button which, when selected, will redirect the page to the login prompt
- */
 export const SignInButton = () => {
     const { instance } = useMsal();
 
